@@ -1,5 +1,8 @@
 from pathlib import Path
 from django.contrib.messages import constants as messages
+import django_heroku
+import dj_database_url
+from decouple import config
 import environ
 
 env = environ.Env()
@@ -27,6 +30,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'anitodo.urls'
@@ -85,3 +89,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+django_heroku.settings(locals())
