@@ -1,0 +1,139 @@
+{% extends 'basic.html' %}
+{% block title %}AniToDo | Home{% endblock %}
+{% block body %}
+
+<div class="alert alert-info m-3" role="alert">
+    {% if request.user.is_authenticated %}
+    Hi! {{request.user.first_name}}
+    <a href="/logout">
+    <button type="button" class="btn btn-primary mx-4">Logout</button></a>
+    <br>
+    {%if count <= 0 %}
+    No Incomplete Tasks left.
+    
+    {%else%}
+    Number of task(s) left: {{count}}
+    {%endif%}
+</div>
+<form action="/additem/" method="post">
+  {% csrf_token %}
+  <div class="form-floating mb-3 mx-3">
+    <input type="text" class="form-control" id="floatingInput" placeholder="Title" name="addtitle">
+    <label for="floatingInput">Title for your task</label>
+  </div>
+  <div class="form-floating mx-3">
+    <input type="text" class="form-control" id="floatingTextarea" placeholder="Description" style="height: 100px" name="adddesc">
+    <label for="floatingTextarea">Description</label>
+  </div>
+  <button type="submit" class="btn btn-success m-3 " >Add Item</button>
+
+</form>
+{% for i in todoitems %}
+
+<div class="accordion accordion-flush mx-3 " id="accordionFlushExample">
+    <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-{{i.todo_id}}">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{i.todo_id}}" aria-expanded="false" aria-controls="flush-collapse{{i.todo_id}}">
+          
+          {{i.title}}  {%if i.complete == True%}<b style="color:rgb(0, 255, 0)">(Completed)</b>{%else%}<b style="color:rgb(255, 0, 0)">(Not Complete)</b>{%endif%}
+        
+        </button>
+      </h2>
+      <div id="flush-collapse{{i.todo_id}}" class="accordion-collapse collapse" aria-labelledby="flush-{{i.todo_id}}" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">{{i.desc}}
+          <a href="{% url 'edit' i.todo_id %}">
+            <button type="button" class="btn btn-warning mx-3">Edit</button>
+          </a>
+          <a href="{% url 'delete' i.todo_id %}">
+            <button type="button" class="btn btn-danger mx-3">Delete</button>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+   
+  </div>{%endfor%}
+
+
+
+    {% else %}
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Login
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/login/" method="post">
+          {%csrf_token%}
+      <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="usernamelogin" required>
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="passwordlogin" required>
+          <label for="floatingPassword">Password</label>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+  Signup
+</button>
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModal1Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal1Label">SignUp</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/signup/" method="post">
+          {%csrf_token%}
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="First Name" name="fname" required>
+            <label for="floatingInput">First Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Last Name" name="lname" required>
+            <label for="floatingInput">Last Name</label>
+          </div>
+      <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="usernamesignup" required>
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="passwordsignup" required>
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="checkPassword" placeholder="Confirm Password" name="confirmpassword" required>
+          <label for="floatingPassword">Confirm Password</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">SignUp</button>        
+      </div></form>
+    </div>
+  </div>
+</div>
+<div class="alert alert-warning my-3" role="alert">
+  Login To Use AniToDo!!
+</div>
+
+
+    {% endif %}
+    
+{% endblock %}
+

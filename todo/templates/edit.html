@@ -1,0 +1,22 @@
+{% extends 'basic.html' %}
+{% block title %}AniToDo | Edit{% endblock %}
+{% block body %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title:</label>
+            {{form.title}}
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description:</label>
+            {{form.desc}}
+          </div>
+          <div class="mb-3">Complete: {{form.complete}}</div>
+          
+        
+        <a href="">
+        <button type="submit" class="btn btn-success m-3 ">Edit Item</button></a>
+      
+      </form>
+</form>
+{%endblock%}
