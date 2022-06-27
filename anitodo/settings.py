@@ -6,7 +6,7 @@ from decouple import config
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-mqi&48_5!v_cw8!n@u8*6g8iyp0b0hnz0t=*k(vdmm^r580dv('
+SECRET_KEY = 'your secret key'
 DEBUG = False
 ALLOWED_HOSTS = ['.tk','https://anitodo14.herokuapp.com/','localhost', '127.0.0.1']
 
