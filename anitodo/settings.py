@@ -4,13 +4,14 @@ import django_heroku
 import dj_database_url
 from decouple import config
 import environ
+import os
 
 env = environ.Env()
 environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = False
-ALLOWED_HOSTS = ['.herokuapp.com','https://anitodo.herokuapp.com','localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com','https://anitodo14.herokuapp.com','localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -89,4 +90,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 django_heroku.settings(locals())
