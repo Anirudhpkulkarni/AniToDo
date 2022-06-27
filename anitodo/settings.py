@@ -10,7 +10,7 @@ environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = False
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com','https://anitodo.herokuapp.com','localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
