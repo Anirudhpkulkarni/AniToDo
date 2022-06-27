@@ -10,6 +10,7 @@ SECRET_KEY = 'your secret key'
 DEBUG = False
 ALLOWED_HOSTS = ['.tk','https://anitodo14.herokuapp.com/','localhost', '127.0.0.1']
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,14 +55,13 @@ WSGI_APPLICATION = 'anitodo.wsgi.application'
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'anitodo_db',
-       'USER': 'Anirudh',
-       'PASSWORD': 'StepOnToCode@14',
-       'HOST': 'heroku',
-       'PORT': '<database_port>',
-   }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
