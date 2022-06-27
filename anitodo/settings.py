@@ -8,7 +8,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mqi&48_5!v_cw8!n@u8*6g8iyp0b0hnz0t=*k(vdmm^r580dv('
 DEBUG = False
-ALLOWED_HOSTS = ['.herokuapp.com','https://anitodo14.herokuapp.com','localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.tk','https://anitodo14.herokuapp.com/','localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -28,6 +28,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     
 ]
 
@@ -53,9 +54,13 @@ WSGI_APPLICATION = 'anitodo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'anitodo_db',
+       'USER': 'Anirudh',
+       'PASSWORD': 'StepOnToCode@14',
+       'HOST': 'heroku',
+       'PORT': '<database_port>',
+   }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -87,6 +92,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 django_heroku.settings(locals())

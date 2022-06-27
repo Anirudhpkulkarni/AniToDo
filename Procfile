@@ -1,1 +1,1 @@
-web: gunicorn anitodo.wsgi 
+web: gunicorn anitodo.wsgi --log-file -
