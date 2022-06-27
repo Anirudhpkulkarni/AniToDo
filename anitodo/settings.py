@@ -3,13 +3,10 @@ from django.contrib.messages import constants as messages
 import django_heroku
 import dj_database_url
 from decouple import config
-import environ
 import os
 
-env = environ.Env()
-environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = 'django-insecure-mqi&48_5!v_cw8!n@u8*6g8iyp0b0hnz0t=*k(vdmm^r580dv('
 DEBUG = False
 ALLOWED_HOSTS = ['.herokuapp.com','https://anitodo14.herokuapp.com','localhost', '127.0.0.1']
 
